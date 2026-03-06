@@ -1,82 +1,124 @@
-# 🚀 Go Payment API
+🚀 Go Payment API
 
-REST API built with Go featuring JWT authentication, layered architecture, unit testing with mocks, and PostgreSQL integration via Docker.
+REST API built with Go (Golang) demonstrating backend best practices such as layered architecture, JWT authentication, unit testing with mocks, and PostgreSQL integration via Docker.
 
-API REST desenvolvida em Go com autenticação JWT, arquitetura em camadas, testes unitários com mocks e integração com PostgreSQL via Docker.
+📌 Overview
 
-## 📌 Overview | Visão Geral
-This project demonstrates backend best practices including:
+This project demonstrates several backend engineering practices:
 
-- Layered architecture (Handler → Service → Repository)
-- Dependency inversion using interfaces
-- JWT authentication
-- Password hashing with bcrypt
-- Middleware for protected routes
-- Unit tests with 85%+ coverage on business logic
-- PostgreSQL running via Docker
+Layered architecture (Handler → Service → Repository)
 
-Este projeto demonstra boas práticas de backend incluindo:
+Dependency inversion using interfaces
 
-- Arquitetura em camadas (Handler → Service → Repository)
-- Inversão de dependência com interfaces
-- Autenticação JWT
-- Criptografia de senha com bcrypt
-- Middleware para rotas protegidas
-- Testes unitários com 85%+ de cobertura na camada de negócio
-- PostgreSQL via Docker
+JWT authentication
 
-## 🏗 Architecture | Arquitetura
-Request Flow:
+Password hashing with bcrypt
+
+Middleware for protected routes
+
+Unit testing with mocks
+
+PostgreSQL running via Docker
+
+Clean and maintainable project structure
+
+The goal of this project is to demonstrate backend fundamentals, authentication flows, testability and production-oriented practices.
+
+🏗 Architecture
+Request Flow
 Request → Handler → Service → Repository → Database
-
-Project Structure:
+Project Structure
 cmd/
 configs/
 internal/
-├── handler/
-├── service/
-├── repository/
-├── middleware/
-├── model/
-├── dto/
-└── utils/
+ ├── handler/
+ ├── service/
+ ├── repository/
+ ├── middleware/
+ ├── model/
+ ├── dto/
+ └── utils/
 
-## 🔐 Authentication Flow | Fluxo de Autenticação
-1. User registration with hashed password (bcrypt)
-2. Login validates password hash
-3. JWT token is generated with expiration
-4. Middleware validates token
-5. Protected route `/profile` requires valid token
+Each layer has a clear responsibility:
 
-## 🧪 Tests | Testes
-Unit tests implemented in the Service layer using manual mocks.
+Handler
+
+Receives HTTP requests
+
+Validates input
+
+Returns responses
+
+Service
+
+Contains business logic
+
+Handles authentication logic
+
+Coordinates repositories
+
+Repository
+
+Responsible for database operations
+
+Abstracted via interfaces
+
+🔐 Authentication Flow
+
+User registers with hashed password (bcrypt)
+
+Login validates password hash
+
+API generates a JWT token
+
+Token includes expiration
+
+Middleware validates JWT
+
+Protected routes require valid token
+
+Example protected route:
+
+GET /profile
+
+Requires header:
+
+Authorization: Bearer JWT_TOKEN
+🧪 Tests
+
+Unit tests are implemented in the Service layer using manual mocks.
 
 Coverage:
-85%+ of business logic statements covered
+
+85%+ coverage of business logic
 
 Run tests:
+
 go test -cover ./...
-🐳 Running the Project | Executando o Projeto
+🐳 Running the Project
 1️⃣ Start PostgreSQL with Docker
 docker compose up -d
 2️⃣ Run the application
 go run cmd/main.go
 
-Server runs at:
+Server will run at:
+
 http://localhost:8080
 📮 Endpoints
-➤ Create User
-
+Create User
 POST /users
+
+Request:
 
 {
   "name": "User Name",
   "email": "user@email.com",
   "password": "123456"
 }
-➤ Login
-
+Login
 POST /login
+
+Request:
 
 {
   "email": "user@email.com",
@@ -88,29 +130,50 @@ Response:
 {
   "token": "JWT_TOKEN"
 }
-➤ Protected Route
+Protected Route
 GET /profile
-Header:
-Authorization: Bearer JWT_TOKEN
 
+Header required:
+
+Authorization: Bearer JWT_TOKEN
 🛠 Technologies
+
 Go (Golang)
+
 PostgreSQL
+
 Docker
-JWT
+
+JWT Authentication
+
 Bcrypt
+
 net/http
+
 Go testing package
 
 🎯 Purpose
-This project highlights backend fundamentals, clean structure, authentication mechanisms, testability, and production-oriented practices.
 
-Este projeto evidencia fundamentos sólidos de backend, estrutura organizada, autenticação segura e testabilidade.
+This project highlights:
+
+Backend architecture design
+
+Authentication with JWT
+
+Secure password handling
+
+Dependency inversion
+
+Testable business logic
+
+Containerized database environment
 
 👨‍💻 Author
+
 Kaue Ferreira Macedo
 
-LinkedIn: https://www.linkedin.com/in/kaue-macedo
-GitHub: https://github.com/iMrKaue
+LinkedIn
+https://www.linkedin.com/in/kaue-macedo
 
-
+GitHub
+https://github.com/iMrKaue
