@@ -1,115 +1,139 @@
-🚀 Go Payment API
+# 🚀 Go Payment API
 
-REST API built with Go (Golang) demonstrating backend best practices such as layered architecture, JWT authentication, unit testing with mocks, and PostgreSQL integration via Docker.
+REST API built with **Go (Golang)** featuring JWT authentication, layered architecture, unit testing with mocks, and PostgreSQL integration via Docker.
 
-📌 Overview
+---
 
-This project demonstrates several backend engineering practices:
+## 📌 Overview
 
-Layered architecture (Handler → Service → Repository)
+This project demonstrates backend engineering best practices:
 
-Dependency inversion using interfaces
-
-JWT authentication
-
-Password hashing with bcrypt
-
-Middleware for protected routes
-
-Unit testing with mocks
-
-PostgreSQL running via Docker
-
-Clean and maintainable project structure
+- Layered architecture (**Handler → Service → Repository**)
+- Dependency inversion using interfaces
+- JWT authentication
+- Password hashing with bcrypt
+- Middleware for protected routes
+- Unit testing with mocks
+- PostgreSQL running via Docker
+- Clean and maintainable project structure
 
 The goal of this project is to demonstrate backend fundamentals, authentication flows, testability and production-oriented practices.
 
-🏗 Architecture
-Request Flow
+---
+
+## 🏗 Architecture
+
+### Request Flow
+
+
 Request → Handler → Service → Repository → Database
-Project Structure
+
+
+### Project Structure
+
+
 cmd/
 configs/
 internal/
- ├── handler/
- ├── service/
- ├── repository/
- ├── middleware/
- ├── model/
- ├── dto/
- └── utils/
+├── handler/
+├── service/
+├── repository/
+├── middleware/
+├── model/
+├── dto/
+└── utils/
 
-Each layer has a clear responsibility:
 
-Handler
+**Handler**
+- Receives HTTP requests
+- Validates input
+- Returns responses
 
-Receives HTTP requests
+**Service**
+- Contains business logic
+- Handles authentication logic
+- Coordinates repositories
 
-Validates input
+**Repository**
+- Responsible for database operations
+- Abstracted via interfaces
 
-Returns responses
+---
 
-Service
+## 🔐 Authentication Flow
 
-Contains business logic
-
-Handles authentication logic
-
-Coordinates repositories
-
-Repository
-
-Responsible for database operations
-
-Abstracted via interfaces
-
-🔐 Authentication Flow
-
-User registers with hashed password (bcrypt)
-
-Login validates password hash
-
-API generates a JWT token
-
-Token includes expiration
-
-Middleware validates JWT
-
-Protected routes require valid token
+1. User registers with hashed password (bcrypt)
+2. Login validates password hash
+3. API generates a JWT token
+4. Token includes expiration
+5. Middleware validates JWT
+6. Protected routes require valid token
 
 Example protected route:
 
+
 GET /profile
 
-Requires header:
+
+Required header:
+
 
 Authorization: Bearer JWT_TOKEN
-🧪 Tests
 
-Unit tests are implemented in the Service layer using manual mocks.
+
+---
+
+## 🧪 Tests
+
+Unit tests are implemented in the **Service layer** using manual mocks.
 
 Coverage:
 
+
 85%+ coverage of business logic
+
 
 Run tests:
 
+
 go test -cover ./...
-🐳 Running the Project
-1️⃣ Start PostgreSQL with Docker
+
+
+---
+
+## 🐳 Running the Project
+
+### 1. Start PostgreSQL with Docker
+
+
 docker compose up -d
-2️⃣ Run the application
+
+
+### 2. Run the application
+
+
 go run cmd/main.go
 
-Server will run at:
+
+Server runs at:
+
 
 http://localhost:8080
-📮 Endpoints
-Create User
+
+
+---
+
+## 📮 Endpoints
+
+### Create User
+
+
 POST /users
 
-Request:
 
+Request body:
+
+```json
 {
   "name": "User Name",
   "email": "user@email.com",
@@ -118,7 +142,7 @@ Request:
 Login
 POST /login
 
-Request:
+Request body:
 
 {
   "email": "user@email.com",
@@ -132,48 +156,40 @@ Response:
 }
 Protected Route
 GET /profile
-
-Header required:
+```
+---
+### Header required:
 
 Authorization: Bearer JWT_TOKEN
 🛠 Technologies
 
-Go (Golang)
+- Go (Golang)
+- PostgreSQL
+- Docker
+- JWT
+- Bcrypt
+- net/http
+- Go testing package
 
-PostgreSQL
-
-Docker
-
-JWT Authentication
-
-Bcrypt
-
-net/http
-
-Go testing package
-
-🎯 Purpose
+---
+### 🎯 Purpose
 
 This project highlights:
 
-Backend architecture design
+- Backend architecture design
+- Authentication with JWT
+- Secure password handling
+- Dependency inversion
+- Testable business logic
+- Containerized database environment
 
-Authentication with JWT
-
-Secure password handling
-
-Dependency inversion
-
-Testable business logic
-
-Containerized database environment
-
-👨‍💻 Author
+---
+### 👨‍💻 Author
 
 Kaue Ferreira Macedo
 
-LinkedIn
+LinkedIn:
 https://www.linkedin.com/in/kaue-macedo
 
-GitHub
+GitHub:
 https://github.com/iMrKaue
